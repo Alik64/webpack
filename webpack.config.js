@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -22,7 +23,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"], // affectation passe de droite vers la gauche [(2) style <= (1) css]
+        // affectation passe de droite vers la gauche [(2) style <= (1) css]
+        use: [
+          NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader
+            : "style-loader",
+          "css-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|webp)/,
@@ -46,7 +53,7 @@ module.exports = {
         },
       ],
     }),
-  ],
+  ].concat(NODE_ENV === "production" ? [new MiniCssExtractPlugin()] : []),
   devServer: {
     port: 3000,
     open: true, // ouverture de l'app au lancement du server
