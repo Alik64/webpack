@@ -10,6 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
+    assetModuleFilename: "images/[name]__[hash][ext][query]",
   },
   module: {
     rules: [
@@ -21,6 +22,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"], // affectation passe de droite vers la gauche [(2) style <= (1) css]
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp)/,
+        type: "asset/resource",
       },
     ],
   },
