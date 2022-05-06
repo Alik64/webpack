@@ -20,6 +20,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        use: ["style-loader", "css-loader"], // affectation passe de droite vers la gauche [(2) style <= (1) css]
       },
     ],
   },
