@@ -11,6 +11,15 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
   },
+  module: {
+    rules: [
+      {
+        test: /\.[tj]sx?$/, // regex qui analyse les fichiers , si !(tsx,jsx,ts,js) => ignorer la vérification
+        loader: "ts-loader",
+        exclude: [/node_modules/], // pour éviter à transpiler les fichiers dans le dossier node_modules
+      },
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public/index.html"), // dir pour notre index.html
