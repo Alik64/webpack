@@ -32,6 +32,25 @@ module.exports = {
         ],
       },
       {
+        test: /\.scss$/,
+        use: [
+          NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader
+            : "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                mode: "local",
+                auto: /\.module\.\w+$/,
+                localIdentName: "[name]__[local]__[hash:base64:5]",
+              },
+            },
+          },
+          "sass-loader",
+        ],
+      },
+      {
         test: /\.(png|jpe?g|gif|webp)/,
         type: "asset/resource",
       },
