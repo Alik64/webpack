@@ -18,6 +18,9 @@ module.exports = {
         loader: "ts-loader",
         exclude: [/node_modules/], // pour éviter à transpiler les fichiers dans le dossier node_modules
       },
+      {
+        test: /\.css$/,
+      },
     ],
   },
   plugins: [
@@ -29,6 +32,6 @@ module.exports = {
     port: 3000,
     open: true, // ouverture de l'app au lancement du server
     hot: true, // hot-reload
-    historyApiFallback: true, // permet de faire pseudo-routing(#routing)(ajout dansl le stack history)
+    historyApiFallback: true, // permet de faire pseudo-routing(#routing)(ajout dans le stack history)
   },
 };
